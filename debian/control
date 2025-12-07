@@ -6,7 +6,7 @@ Uploaders: Commander-Z3R0
 Build-Depends: debhelper-compat (= 13)
 Standards-Version: 4.6.1
 Homepage: https://github.com/Sirr-OS/plymouth-theme-mobian
-Vcs-Github: https://github.com/Sirr-OS/plymouth-theme-sirros.git
+Vcs-Git: https://github.com/Sirr-OS/plymouth-theme-sirros.git
 Vcs-Browser: https://github.com/Sirr-OS/plymouth-theme-sirros
 Rules-Requires-Root: no
 
