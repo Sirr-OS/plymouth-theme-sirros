@@ -1,0 +1,5 @@
+debian/*.substvars
+debian/.debhelper
+debian/sirros-plymouth-theme
+debian/files
+debian/debhelper-build-stamp

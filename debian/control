@@ -1,0 +1,29 @@
+Source: plymouth-theme-sirros
+Section: misc
+Priority: optional
+Maintainer: Commander-Z3R0
+Uploaders: Commander-Z3R0
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.1
+Homepage: https://github.com/Sirr-OS/plymouth-theme-mobian
+Vcs-Github: https://github.com/Sirr-OS/plymouth-theme-sirros.git
+Vcs-Browser: https://github.com/Sirr-OS/plymouth-theme-sirros
+Rules-Requires-Root: no
+
+Package: plymouth-theme-sirros
+Architecture: all
+Depends:
+ ${misc:Depends},
+ plymouth,
+ plymouth-label,
+Provides:
+ plymouth-theme,
+Description: boot animation, logger and I/O multiplexer - SirrOS theme
+ Plymouth provides a boot-time I/O multiplexing framework - the most obvious
+ use for which is to provide an attractive graphical animation in place of
+ the text messages that normally get shown during boot. (The messages are
+ instead redirected to a logfile for later viewing.) However, in event-driven
+ boot systems Plymouth can also usefully handle user interaction such as
+ password prompts for encrypted file systems.
+ .
+ This package provides the default SirrOS theme.

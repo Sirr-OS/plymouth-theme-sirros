@@ -1,0 +1,44 @@
+name: Build Plymouth SirrOS Theme
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y dpkg-dev debhelper
+
+      - name: Prepare build directory
+        run: |
+          THEME_NAME="plymouth-theme-sirros"
+          BUILD_DIR="build/${THEME_NAME}"
+          mkdir -p "$BUILD_DIR"
+
+          cp -R DEBIAN "$BUILD_DIR/"
+
+          mkdir -p "$BUILD_DIR/usr/share/plymouth/themes/sirros"
+
+          cp -R sirros/* "$BUILD_DIR/usr/share/plymouth/themes/sirros/"
+
+      - name: Build .deb package
+        run: |
+          cd build
+          dpkg-deb --build plymouth-theme-sirros
+
+      - name: Upload .deb artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plymouth-theme-sirros
+          path: build/plymouth-theme-sirros.deb
