@@ -1,13 +1,13 @@
 name: Build Debian Package
 
-permissions:
-  contents: write
-
 on:
   push:
     tags:
-      - "v*"
+      - "v*"   
   workflow_dispatch:
+
+permissions:
+  contents: write  
 
 jobs:
   build:
@@ -26,21 +26,21 @@ jobs:
         run: |
           dpkg-buildpackage -us -uc
 
-      - name: Move build files into artifacts folder
+      - name: Move .deb files to artifacts
         run: |
           mkdir -p artifacts
           cp ../*.deb artifacts/
           cp ../*.changes artifacts/ || true
           cp ../*.buildinfo artifacts/ || true
 
-      - name: Create Release
+      - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: "Release ${{ github.ref_name }}"
+          release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
 
@@ -50,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/*.deb
-          asset_name: plymouth-theme-sirros_${{ github.ref_name }}.deb
+          asset_path: artifacts/plymouth-theme-sirros_1.1_all.deb
+          asset_name: plymouth-theme-sirros_1.1_all.deb
           asset_content_type: application/vnd.debian.binary-package
